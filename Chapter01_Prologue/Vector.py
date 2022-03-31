@@ -19,3 +19,7 @@ class Vector:
     def __add__(self, other):
         x = self.x + other.x
         y = self.y + other.y
+        return Vector(x, y)
+    
+    def __mul__(self, scalar):
+        return Vector(self.x * scalar, self.y * scalar)
