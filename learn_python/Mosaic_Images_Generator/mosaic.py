@@ -198,8 +198,8 @@ if __name__ == "__main__":
     filePath = os.path.dirname(os.path.abspath(__file__))  # 获取当前的路径
     start_time = time.time()  # 程序开始运行时间, 记录一共运行了多久
     # 创建马赛克块, 创建素材库
-    createdb = create_image_db(IN_DIR=os.path.join(filePath, 'images/'),
-                               OUT_DIR=os.path.join(filePath, 'outputImages/'),
+    createdb = create_image_db(IN_DIR=os.path.join(filePath, 'images_chen/'),
+                               OUT_DIR=os.path.join(filePath, 'outputImages_chen/'),
                                SLICE_SIZE=100,
                                REPATE=20,
                                OUT_SIZE=5000)
@@ -212,5 +212,6 @@ if __name__ == "__main__":
                            OUT_SIZE=5000)
     out = createM.make_puzzle(img=os.path.join(filePath, 'Zelda.jpg'))
     # 打印时间
-    print("耗时: %s" % (time.time() - start_time))
-    print("已完成")
+    print()
+    print("Time used: %ss" % (time.time() - start_time))
+    print("Done")
