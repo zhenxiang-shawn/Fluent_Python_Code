@@ -79,7 +79,7 @@ class create_image_db(mosaic):
         """获取文件夹内图像的地址
         """
         paths = []
-        suffixs = ['png', 'jpg']
+        suffixs = ['png', 'jpg', 'JPG', 'jpeg']
         for file_ in os.listdir(self.IN_DIR):
             suffix = file_.split('.', 1)[1]  # 获得文件后缀
             if suffix in suffixs:  # 通过后缀判断是否是图片
@@ -195,22 +195,29 @@ class create_mosaic(mosaic):
 
 
 if __name__ == "__main__":
+    #####################################
+    # config
+    images_folder = 'images_chen/'
+    target_image_name = 'Target.JPG'
+    out_images_folder = 'outputImages_chen/'
+    #####################################
+
     filePath = os.path.dirname(os.path.abspath(__file__))  # 获取当前的路径
     start_time = time.time()  # 程序开始运行时间, 记录一共运行了多久
     # 创建马赛克块, 创建素材库
-    createdb = create_image_db(IN_DIR=os.path.join(filePath, 'images_chen/'),
-                               OUT_DIR=os.path.join(filePath, 'outputImages_chen/'),
+    createdb = create_image_db(IN_DIR=os.path.join(filePath, images_folder),
+                               OUT_DIR=os.path.join(filePath, out_images_folder),
                                SLICE_SIZE=100,
-                               REPATE=20,
+                               REPATE=50,
                                OUT_SIZE=5000)
     createdb.convert_all_images()
     # 创建拼图 (这里使用绝对路径)
-    createM = create_mosaic(IN_DIR=os.path.join(filePath, 'images/'),
-                           OUT_DIR=os.path.join(filePath, 'outputImages/'),
+    createM = create_mosaic(IN_DIR=os.path.join(filePath, images_folder),
+                           OUT_DIR=os.path.join(filePath, out_images_folder),
                            SLICE_SIZE=100,
-                           REPATE=20,
+                           REPATE=50,
                            OUT_SIZE=5000)
-    out = createM.make_puzzle(img=os.path.join(filePath, 'Zelda.jpg'))
+    out = createM.make_puzzle(img=os.path.join(filePath, target_image_name))
     # 打印时间
     print()
     print("Time used: %ss" % (time.time() - start_time))
